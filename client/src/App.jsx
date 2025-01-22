@@ -42,14 +42,17 @@ const App = () => {
     ]);
     setLoading(true);
 
+    const message =
+      userMessage.charAt(0).toUpperCase() + userMessage.slice(1).toLowerCase();
+
     if (
-      userMessage.toLowerCase() === "laptop" ||
-      userMessage.toLowerCase() === "tablet" ||
-      userMessage.toLowerCase() === "smartphone"
+      message === "Laptop" ||
+      message === "Tablet" ||
+      message === "Smartphone"
     ) {
       try {
         const response = await axios.post(API_URL, {
-          product_name: userMessage,
+          product_name: message,
         });
 
         setChat((prevChat) => [
@@ -83,7 +86,7 @@ const App = () => {
     <div className="h-screen flex flex-col items-center justify-center bg-gray-100 p-5">
       <h1 className="text-2xl font-bold mb-4">Product Agent Chatbot</h1>
 
-      <div className="w-full max-w-lg bg-white p-4 rounded-lg shadow-md h-96 overflow-y-auto">
+      <div className="w-full max-w-lg bg-white p-4 rounded-lg shadow-md h-[700px] overflow-y-auto">
         {chat.map((message, index) => (
           <div key={index} className="mb-2">
             {message.user && (
